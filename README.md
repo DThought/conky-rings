@@ -1,7 +1,7 @@
 Conky Rings
 ===========
 
-Adapted from Clock Rings by londonali1010
+ A simple ring layout for Conky
 
 
 Installation
