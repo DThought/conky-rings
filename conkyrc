@@ -1,104 +1,36 @@
-# Conky settings #
 background no
 update_interval 1
-
 cpu_avg_samples 2
 net_avg_samples 2
-
-override_utf8_locale yes
-
 double_buffer yes
 no_buffers yes
-
 text_buffer_size 2048
-#imlib_cache_size 0
-
-temperature_unit fahrenheit
-
-# Window specifications #
-
 own_window yes
-own_window_type desktop
+own_window_type override
 own_window_transparent yes
 own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
-
 border_inner_margin 0
 border_outer_margin 0
-
-minimum_size 200 250
-maximum_width 200
-
+minimum_size 500 300
 alignment tr
-gap_x 35
-gap_y 55
-
-# Graphics settings #
 draw_shades no
-draw_outline no
-draw_borders no
-draw_graph_borders no
-
-# Text settings #
 use_xft yes
-xftfont ubuntu:size=8
+xftfont monospace:size=10
 xftalpha 0.5
-
-uppercase no
-
-temperature_unit celsius
-
-
-default_color FFFFFF
-
-# Lua Load  #
-lua_load ~/.lua/scripts/clock_rings.lua
-lua_draw_hook_pre clock_rings
+default_color 99A9B8
+lua_load ~/.lua/scripts/rings.lua
+lua_draw_hook_pre rings
 
 TEXT
-${voffset 8}${color 7A5ADA}${font ubuntu:size=16}${time %A}${font}${voffset -8}${alignr 50}${color FFFFFF}${font ubuntu:size=38}${time %e}${font}
-${color FFFFFF}${voffset -30}${color FFFFFF}${font ubuntu:size=18}${time %b}${font}${voffset -3} ${color FFFFFF}${font ubuntu:size=20}${time %Y}${font}${color 7A5ADA}${hr}
-${voffset 140}${font ubuntu:size=10}${alignr}WEATHER${font}
-${font ubuntu:size=12}${color FFFFFF}${alignr}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ SBSM temperature temperature 30} °C${font}
-${image ~/.conky/gentoo-logo.png -p 58,115 -s 80x80}
-
-#CPU Section
-${color FFFFFF}${goto 5}${voffset 35}${cpu cpu0}%
-${color 7A5ADA}${goto 5}CPU 0
-${color FFFFFF}${goto 55}${voffset -22}${cpu cpu1}%
-${color 7A5ADA}${goto 55}CPU 1
-${color FFFFFF}${goto 105}${voffset -22}${cpu cpu2}%
-${color 7A5ADA}${goto 105}CPU 2
-${color FFFFFF}${goto 155}${voffset -22}${cpu cpu3}%
-${color 7A5ADA}${goto 155}CPU 3
-${color FFFFFF}${goto 5}${voffset 35}${cpu cpu4}%
-${color 7A5ADA}${goto 5}CPU 4
-${color FFFFFF}${goto 55}${voffset -22}${cpu cpu5}%
-${color 7A5ADA}${goto 55}CPU 5
-${color FFFFFF}${goto 105}${voffset -22}${cpu cpu6}%
-${color 7A5ADA}${goto 105}CPU 6
-${color FFFFFF}${goto 155}${voffset -22}${cpu cpu7}%
-${color 7A5ADA}${goto 155}CPU 7
-
-${color FFFFFF}${goto 5}${voffset 23}${memperc}%
-${color 7A5ADA}${goto 5}RAM
-${color FFFFFF}${goto 30}${voffset 23}${fs_used_perc /}%
-${color 7A5ADA}${goto 30}Root
-${color FFFFFF}${goto 55}${voffset 23}${fs_used_perc /home}%
-${color 7A5ADA}${goto 55}Home
-${color FFFFFF}${goto 80}${voffset 25}${downspeedf wlan0}
-${color FFFFFF}${goto 80}${upspeedf wlan0}
-${color 7A5ADA}${goto 80}Wlan0
-
-
-${color 7A5ADA}${font ubuntu:size=8}Guayadeque: ${color FFFFFF} ${execi 10 conkyGuayadeque --datatype=AR -n} - ${execi 10 conkyGuayadeque --datatype=TI -n}
-${color 7A5ADA}${font ubuntu:size=8}Uptime: ${color FFFFFF} ${uptime_short}
-${color 7A5ADA}${font ubuntu:size=8}GPU: ${color FFFFFF} ${nvidia temp} degrees
-${color 7A5ADA}${font ubuntu:size=8}Last sync: ${color FFFFFF} ${execi 180 cat /usr/portage/metadata/timestamp.chk}
-${color 7A5ADA}${font ubuntu:size=8}Processes: ${color FFFFFF} ${processes}
-${color 7A5ADA}${font ubuntu:size=8}Running: ${color FFFFFF} ${running_processes}
-${color 7A5ADA}${font ubuntu:size=8}Battery: ${color FFFFFF} $battery ${battery_bar BAT0 11,0}
-
-${color 7A5ADA}${font ubuntu:size=8}${alignr}${nodename}
-${color 7A5ADA}${font ubuntu:size=8}${alignr}${pre_exec cat /etc/issue.net}  $machine
-${color 7A5ADA}${font ubuntu:size=8}${alignr}Kernel: ${kernel}
-
+${voffset 84}${font neuropol}CPU${goto 160}${font}Usage${alignr 106}${cpu}%
+${goto 160}Temperature${alignr 106}${acpitemp}°C
+${voffset 126}${font neuropol}MEMORY${goto 160}${font}Memory${alignr 106}${memperc}%
+${goto 160}Swap${alignr 106}${swapperc}%
+${voffset 126}${font neuropol}FILESYSTEMS${goto 160}${font}${execi 1 df | grep ^/dev | sed -n 1p | awk '{ print $6 }'}${alignr 106}${execi 1 df -h | grep ^/dev | sed -n 1p | awk '{ print $3 " / " $2 }'}
+${goto 160}${execi 1 df | grep ^/dev | sed -n 3p | awk '{ print $6 }'}${alignr 106}${execi 1 df -h | grep ^/dev | sed -n 3p | awk '{ print $3 " / " $2 }'}
+${goto 160}${execi 1 df | grep ^/dev | sed -n 4p | awk '{ print $6 }'}${alignr 106}${execi 1 df -h | grep ^/dev | sed -n 4p | awk '{ print $3 " / " $2 }'}
+${goto 160}${execi 1 df | grep ^/dev | sed -n 5p | awk '{ print $6 }'}${alignr 106}${execi 1 df -h | grep ^/dev | sed -n 5p | awk '{ print $3 " / " $2 }'}
+${voffset 92}${font neuropol}NETWORK${goto 160}${font}eno1 down${alignr 106}${downspeed eno1}
+${goto 160}wlo1 down${alignr 106}${downspeed wlo1}
+${goto 160}eno1 up${alignr 106}${upspeed eno1}
+${goto 160}wlo1 up${alignr 106}${upspeed wlo1}
