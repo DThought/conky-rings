@@ -4,8 +4,8 @@ Conky Rings
 Adapted from Clock Rings by londonali1010
 
 
-INSTALL
--------
+Installation
+------------
 
 Copy conkyrc to ~/.conkyrc and rings.lua to ~/.lua/scripts/rings.lua, then
 start Conky.
@@ -16,7 +16,7 @@ You may also want to replace `eno1` and `wlo1` with your computer's Ethernet
 and wireless devices, as appropriate.
 
 
-CHANGELOG
+Changelog
 ---------
 
 2009-09-30  londonali1010
@@ -33,3 +33,9 @@ CHANGELOG
 *   complete redesign
 *   refactored settings format
 *   removed clocks
+
+
+License
+-------
+
+This software is licensed under the [WTFPL](http://www.wtfpl.net/).
